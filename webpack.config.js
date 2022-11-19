@@ -6,7 +6,6 @@ const webpack = require('webpack');
 // const Dotenv = require('dotenv-webpack');
 require('dotenv').config();
 
-
 module.exports = {
   entry: './src/index.js',
   output: {
@@ -55,10 +54,8 @@ module.exports = {
     }),
     // new Dotenv(),
     new webpack.DefinePlugin({
-      'process.env': {
-        CLIENT_ID_PP: JSON.stringify(process.env.CLIENT_ID_PP),
-        KEY_MAP: JSON.stringify(process.env.KEY_MAP),
-      },
+      'process.env.CLIENT_ID_PP': JSON.stringify(process.env.CLIENT_ID_PP),
+      'process.env.KEY_MAP': JSON.stringify(process.env.KEY_MAP),
     }),
   ],
   devServer: {
