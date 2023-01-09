@@ -1,8 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import initialState from '../initialState';
+
+const API = 'http://localhost:1337/api/products?populate=*';
 
 const useInitialState = () => {
   const [state, setState] = useState(initialState);
+  // const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios(API);
+      
+      setState({
+        ...state,
+        products: [...state.products, ...response.data.data],
+      });
+    }
+    fetchData();
+  }, []);
 
   const addToCart = (payload) => {
     setState({
@@ -25,12 +41,12 @@ const useInitialState = () => {
     });
   };
 
-  const addNewOrder = payload => {
+  const addNewOrder = (payload) => {
     setState({
       ...state,
-      orders: [...state.orders, payload]
-    })
-  }
+      orders: [...state.orders, payload],
+    });
+  };
 
   return {
     addToCart,
@@ -38,6 +54,7 @@ const useInitialState = () => {
     addToBuyer,
     addNewOrder,
     state,
+    // products,
   };
 };
 

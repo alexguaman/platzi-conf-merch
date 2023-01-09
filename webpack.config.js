@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 // const Dotenv = require('dotenv-webpack');
 require('dotenv').config();
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -56,6 +57,13 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.CLIENT_ID_PP': JSON.stringify(process.env.CLIENT_ID_PP),
       'process.env.KEY_MAP': JSON.stringify(process.env.KEY_MAP),
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/manifest.json', to: '' },
+        { from: 'public/service-worker.js', to: '' },
+        { from: 'public/icon.png', to: 'assets' },
+      ],
     }),
   ],
   devServer: {

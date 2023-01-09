@@ -7,6 +7,8 @@ const Products = () => {
   const { state, addToCart } = useContext(AppContext);
   const { products } = state;
 
+  console.log("Products", products);
+
   const handleAddToCart = (product) => () => {
     addToCart(product);
   };
@@ -17,7 +19,7 @@ const Products = () => {
         {products.map((product) => (
           <Product
             key={product.id}
-            product={product}
+            product={product.attributes}
             handleAddToCart={handleAddToCart}
           />
         ))}

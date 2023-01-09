@@ -1,8 +1,10 @@
 import React from 'react';
 
+const urlImage = "http://localhost:1337";
+
 const Product = ({ product, handleAddToCart }) => (
     <div className="Products-item">
-      <img src={product.image} alt={product.title} />
+      <img src={`${urlImage}${product.image.data[0].attributes.url}`} alt={product.title} />
       <div className="Product-item-info">
         <h2>
           {product.title}

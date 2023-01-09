@@ -13,6 +13,7 @@ import useInitialState from '../hooks/useInitialState';
 
 const App = () => {
   const initialState = useInitialState();
+  // const isEmpty = initialState.products.length; // Object.keys(initialState).length;
   return (
     <AppContext.Provider value={initialState}>
       <BrowserRouter>
